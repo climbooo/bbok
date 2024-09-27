@@ -67,7 +67,7 @@ public class SecurityConfig {
 		    															// options 메소드로 사전 요청을 보내게 된다.
 		    															// 사전에 요청이 안전한지 확인하기 위함(유효한지 서버에 미리 파악할 수 있도록 보내는 수단이다.)
 		    	.antMatchers("/auth/**").permitAll()
-		    	.antMatchers("/api/v1/products/**").permitAll()
+		    	.antMatchers("/api/v1/menus/**").permitAll()
 		    	.antMatchers("/api/v1/reviews/**").permitAll()
 //		    	.antMatchers("/api/**").hasRole("USER")
 //		    	.antMatchers("/api/**").hasRole("ADMIN")

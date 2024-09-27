@@ -9,7 +9,7 @@ public class MemberRoleDTO {
 
 	public MemberRoleDTO() {
 	}
-
+	
 	public MemberRoleDTO(int memberNo, int authorityCode, AuthorityDTO authority) {
 		this.memberNo = memberNo;
 		this.authorityCode = authorityCode;

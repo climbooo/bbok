@@ -28,6 +28,12 @@ public class MemberRole {
 
 	public MemberRole() {
 	}
+	
+	public MemberRole(int memberNo, int authorityCode) {
+		super();
+		this.memberNo = memberNo;
+		this.authorityCode = authorityCode;
+	}
 
 	public MemberRole(int memberNo, int authorityCode, Authority authority) {
 		this.memberNo = memberNo;
