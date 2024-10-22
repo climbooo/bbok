@@ -27,6 +27,35 @@ const actions = createActions({
 
 const menuReducer = handleActions(
     {
-        
-    }
-)
+        [GET_MENU]: (state, { payload }) => {
+            return payload;
+        },
+        [GET_MENUS]: (state, { payload }) => {
+            return payload;
+        },
+        [GET_MENUS_KOREAN]: (state, { payload }) => {
+            return payload;
+        },
+        [GET_MENUS_CHINESE]: (state, { payload }) => {
+            return payload;
+        },
+        [GET_MENUS_JAPANESE]: (state, { payload }) => {
+            return payload;
+        },
+        [GET_MENUS_WESTERN]: (state, { payload }) => {
+            return payload;
+        },
+        [GET_MENUS_DESSERT]: (state, { payload }) => {
+            return payload;
+        },
+        [GET_MENUS_BEVERAGE]: (state, { payload }) => {
+            return payload;
+        },
+        [GET_MENUS_ETC]: (state, { payload }) => {
+            return payload;
+        }
+    },
+    initialState
+);
+
+export default menuReducer;

@@ -66,10 +66,27 @@ public class MenuController {
 	
 	@Operation(summary = "한식 리스트 조회 요청", description = "한식 카테고리에 해당하는 메뉴 리스트가 조회가 진행됩니다.", tags = { "MenuController" })
 	@GetMapping("/menus/korean")
-	public ResponseEntity<ResponseDTO> selectMenuListAboutKorean() {
+	public ResponseEntity<ResponseDTO> selectMenuListAboutKorean(@RequestParam(name = "offset", defaultValue = "1") String offset) {
+		log.info("[MenuController] selectMenuListWithPaging : " + offset);
 		
-		return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", menuService.selectMenuListAboutKorean()));
+		int total = menuService.selectMenuTotalAboutKorean();
+		
+		Criteria cri = new Criteria(Integer.valueOf(offset), 10);
+		PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
+		
+		pagingResponseDTO.setData(menuService.selectKoreanListWithPaging(cri));
+		
+		pagingResponseDTO.setPageInfo(new PageDTO(cri, total));
+		
+		return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", pagingResponseDTO));
 	}
+	
+//	@Operation(summary = "한식 리스트 조회 요청", description = "한식 카테고리에 해당하는 메뉴 리스트가 조회가 진행됩니다.", tags = { "MenuController" })
+//	@GetMapping("/menus/korean")
+//	public ResponseEntity<ResponseDTO> selectMenuListAboutKorean() {
+//		
+//		return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", menuService.selectMenuListAboutKorean()));
+//	}
 	
 	@Operation(summary = "중식 리스트 조회 요청", description = "중식 카테고리에 해당하는 메뉴 리스트가 조회가 진행됩니다.", tags = { "MenuController" })
 	@GetMapping("/menus/chinese")

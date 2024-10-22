@@ -57,7 +57,7 @@ public class MenuService {
 		
 		int index = cri.getPageNum() - 1;
 		int count = cri.getAmount();
-		Pageable paging = PageRequest.of(index, count, Sort.by("MenuCode").descending());
+		Pageable paging = PageRequest.of(index, count, Sort.by("menuCode").descending());
 		
 		Page<Menu> result = menuRepository.findByMenuOrderable("Y", paging);
 		List<Menu> menuList = (List<Menu>)result.getContent();
@@ -69,6 +69,25 @@ public class MenuService {
 		log.info("[MenuService] selectMenuListWithPaging End ====================================");
 		
 		return menuList.stream().map(menu -> modelMapper.map(menu, MenuDTO.class));
+	}
+	
+	public Object selectKoreanListWithPaging(Criteria cri) {
+		log.info("[MenuService] selectKoreanListWithPaging Start ================================");
+		
+		int index = cri.getPageNum() - 1;
+		int count = cri.getAmount();
+		Pageable paging = PageRequest.of(index, count, Sort.by("menuCode").descending());
+		
+		Page<Menu> result = menuRepository.findByMenuOrderable("Y", paging);
+		List<Menu> koreanList = (List<Menu>)result.getContent();
+		
+		for(int i = 0 ; i < koreanList.size() ; i++) {
+			koreanList.get(i).setMenuImage(IMAGE_URL + koreanList.get(i).getMenuImage());
+		}
+		
+		log.info("[MenuService] selectKoreanListWithPaging End ====================================");
+		
+		return koreanList.stream().map(menu -> modelMapper.map(menu, MenuDTO.class));
 	}
 
 	public Object selectMenu(int menuCode) {
@@ -195,6 +214,18 @@ public class MenuService {
 		log.info("[MenuService] selectMenuListAboutEtc End ========================================");
 		
 		return menuListAboutEtc.stream().map(menu -> modelMapper.map(menu, MenuDTO.class)).collect(Collectors.toList());
+	}
+
+	public int selectMenuTotalAboutKorean() {
+		log.info("[MenuService] selectMenuTotalAboutKorean Start ========================================");
+		
+		List<Menu> koreanList = menuRepository.findByKoreanMenu();
+		
+		log.info("koreanList: {}", koreanList);
+		
+		log.info("[MenuService] selectMenuTotalAboutKorean End ========================================");
+		
+		return koreanList.size();
 	}
 
 }

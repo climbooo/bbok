@@ -41,4 +41,59 @@ VALUES
 INSERT INTO TBL_MENU
 VALUES
 (SEQ_MENU_CODE.NEXTVAL, '1', '테스트', '1000',
-'테스트하자', 'Y', 'ASD', '100');
+'더미데이터', 'Y', 'fileImage.png', '100');
+
+INSERT INTO TBL_MENU
+VALUES
+(SEQ_MENU_CODE.NEXTVAL, '1', '테스트', '1000',
+'더미데이터', 'Y', 'fileImage.png', '100');
+
+INSERT INTO TBL_MENU
+VALUES
+(SEQ_MENU_CODE.NEXTVAL, '1', '테스트', '1000',
+'더미데이터', 'Y', 'fileImage.png', '100');
+
+INSERT INTO TBL_MENU
+VALUES
+(SEQ_MENU_CODE.NEXTVAL, '1', '테스트', '1000',
+'더미데이터', 'Y', 'fileImage.png', '100');
+
+INSERT INTO TBL_MENU
+VALUES
+(SEQ_MENU_CODE.NEXTVAL, '1', '테스트', '1000',
+'더미데이터', 'Y', 'fileImage.png', '100');
+
+INSERT INTO TBL_MENU
+VALUES
+(SEQ_MENU_CODE.NEXTVAL, '1', '테스트', '1000',
+'더미데이터', 'Y', 'fileImage.png', '100');
+
+INSERT INTO TBL_MENU
+VALUES
+(SEQ_MENU_CODE.NEXTVAL, '1', '테스트', '1000',
+'더미데이터', 'Y', 'fileImage.png', '100');
+
+INSERT INTO TBL_MENU
+VALUES
+(SEQ_MENU_CODE.NEXTVAL, '1', '테스트', '1000',
+'더미데이터', 'Y', 'fileImage.png', '100');
+
+INSERT INTO TBL_MENU
+VALUES
+(SEQ_MENU_CODE.NEXTVAL, '1', '테스트', '1000',
+'더미데이터', 'Y', 'fileImage.png', '100');
+
+INSERT INTO TBL_MENU
+VALUES
+(SEQ_MENU_CODE.NEXTVAL, '1', '테스트', '1000',
+'더미데이터', 'Y', 'fileImage.png', '100');
+
+INSERT INTO TBL_MENU
+VALUES
+(SEQ_MENU_CODE.NEXTVAL, '1', '테스트', '1000',
+'더미데이터', 'Y', 'fileImage.png', '100');
+
+INSERT INTO TBL_MENU
+VALUES
+(SEQ_MENU_CODE.NEXTVAL, '1', '테스트', '1000',
+'더미데이터', 'Y', 'fileImage.png', '100');
