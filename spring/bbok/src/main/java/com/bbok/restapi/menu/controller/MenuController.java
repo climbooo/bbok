@@ -35,7 +35,7 @@ public class MenuController {
 	@Operation(summary = "메뉴 리스트 조회 요청", description = "메뉴 조회 및 페이징 처리가 진행됩니다.", tags = { "MenuController" })
 	@GetMapping("/menus")
 	public ResponseEntity<ResponseDTO> selectMenuListWithPaging(@RequestParam(name = "offset", defaultValue = "1") String offset) {
-		
+		log.info("[MenuController] selectMenuListWithPaging Start ========================================");
 		log.info("[MenuController] selectMenuListWithPaging : " + offset);
 		
 		int total = menuService.selectMenuTotal();
@@ -47,6 +47,7 @@ public class MenuController {
 		
 		pagingResponseDTO.setPageInfo(new PageDTO(cri, total));
 		
+		log.info("[MenuController] selectMenuListWithPaging End ========================================");
 		return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", pagingResponseDTO));
 	}
 	
@@ -67,16 +68,19 @@ public class MenuController {
 	@Operation(summary = "한식 리스트 조회 요청", description = "한식 카테고리에 해당하는 메뉴 리스트가 조회가 진행됩니다.", tags = { "MenuController" })
 	@GetMapping("/menus/korean")
 	public ResponseEntity<ResponseDTO> selectMenuListAboutKorean(@RequestParam(name = "offset", defaultValue = "1") String offset) {
-		log.info("[MenuController] selectMenuListWithPaging : " + offset);
+		log.info("[MenuController] selectMenuListAboutKorean Start ========================================");
+		log.info("[MenuController] selectMenuListAboutKorean offset: " + offset);
 		
-		int total = menuService.selectMenuTotalAboutKorean();
+		int total = menuService.selectMenuTotalAboutCategory(1);
 		
 		Criteria cri = new Criteria(Integer.valueOf(offset), 10);
 		PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
 		
-		pagingResponseDTO.setData(menuService.selectKoreanListWithPaging(cri));
+		pagingResponseDTO.setData(menuService.selectMenuListWithCategoryAndPaging(1,cri));
 		
 		pagingResponseDTO.setPageInfo(new PageDTO(cri, total));
+		
+		log.info("[MenuController] selectMenuListAboutKorean End ========================================");
 		
 		return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", pagingResponseDTO));
 	}
@@ -90,43 +94,109 @@ public class MenuController {
 	
 	@Operation(summary = "중식 리스트 조회 요청", description = "중식 카테고리에 해당하는 메뉴 리스트가 조회가 진행됩니다.", tags = { "MenuController" })
 	@GetMapping("/menus/chinese")
-	public ResponseEntity<ResponseDTO> selectMenuListAboutChinese() {
+	public ResponseEntity<ResponseDTO> selectMenuListAboutChinese(@RequestParam(name = "offset", defaultValue = "1") String offset) {
+		log.info("[MenuController] selectMenuListAboutChinese Start ====================================");
 		
-		return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", menuService.selectMenuListAboutChinese()));
+		int total = menuService.selectMenuTotalAboutCategory(2);
+		
+		Criteria cri = new Criteria(Integer.valueOf(offset), 10);
+		PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
+		
+		pagingResponseDTO.setData(menuService.selectMenuListWithCategoryAndPaging(2, cri));
+		
+		pagingResponseDTO.setPageInfo(new PageDTO(cri, total));
+		
+		log.info("[MenuController] selectMenuListAboutChinese End ====================================");
+		return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", pagingResponseDTO));
 	}
 	
 	@Operation(summary = "일식 리스트 조회 요청", description = "일식 카테고리에 해당하는 메뉴 리스트가 조회가 진행됩니다.", tags = { "MenuController" })
 	@GetMapping("/menus/japanese")
-	public ResponseEntity<ResponseDTO> selectMenuListAboutJapanese() {
+	public ResponseEntity<ResponseDTO> selectMenuListAboutJapanese(@RequestParam(name = "offset", defaultValue = "1") String offset) {
+		log.info("[MenuController] selectMenuListAboutJapanese Start ====================================");
 		
-		return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", menuService.selectMenuListAboutJapanese()));
+		int total = menuService.selectMenuTotalAboutCategory(3);
+		
+		Criteria cri = new Criteria(Integer.valueOf(offset), 10);
+		PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
+		
+		pagingResponseDTO.setData(menuService.selectMenuListWithCategoryAndPaging(3, cri));
+		
+		pagingResponseDTO.setPageInfo(new PageDTO(cri, total));
+		
+		log.info("[MenuController] selectMenuListAboutJapanese End ====================================");
+		return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", pagingResponseDTO));
 	}
 	
 	@Operation(summary = "양식 리스트 조회 요청", description = "양식 카테고리에 해당하는 메뉴 리스트가 조회가 진행됩니다.", tags = { "MenuController" })
-	@GetMapping("/menus/Western")
-	public ResponseEntity<ResponseDTO> selectMenuListAboutWestern() {
+	@GetMapping("/menus/western")
+	public ResponseEntity<ResponseDTO> selectMenuListAboutWestern(@RequestParam(name = "offset", defaultValue = "1") String offset) {
+		log.info("[MenuController] selectMenuListAboutWestern Start ====================================");
 		
-		return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", menuService.selectMenuListAboutWestern()));
+		int total = menuService.selectMenuTotalAboutCategory(4);
+		
+		Criteria cri = new Criteria(Integer.valueOf(offset), 10);
+		PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
+		
+		pagingResponseDTO.setData(menuService.selectMenuListWithCategoryAndPaging(4, cri));
+		
+		pagingResponseDTO.setPageInfo(new PageDTO(cri, total));
+		
+		log.info("[MenuController] selectMenuListAboutWestern End ====================================");
+		return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", pagingResponseDTO));
 	}
 	
 	@Operation(summary = "디저트 리스트 조회 요청", description = "디저트 카테고리에 해당하는 메뉴 리스트가 조회가 진행됩니다.", tags = { "MenuController" })
 	@GetMapping("/menus/dessert")
-	public ResponseEntity<ResponseDTO> selectMenuListAboutDessert() {
+	public ResponseEntity<ResponseDTO> selectMenuListAboutDessert(@RequestParam(name = "offset", defaultValue = "1") String offset) {
+		log.info("[MenuController] selectMenuListAboutDessert Start ====================================");
 		
-		return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", menuService.selectMenuListAboutDessert()));
+		int total = menuService.selectMenuTotalAboutCategory(5);
+		
+		Criteria cri = new Criteria(Integer.valueOf(offset), 10);
+		PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
+		
+		pagingResponseDTO.setData(menuService.selectMenuListWithCategoryAndPaging(5, cri));
+		
+		pagingResponseDTO.setPageInfo(new PageDTO(cri, total));
+		
+		log.info("[MenuController] selectMenuListAboutDessert End ====================================");
+		return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", pagingResponseDTO));
 	}
 	
 	@Operation(summary = "음료 리스트 조회 요청", description = "음료 카테고리에 해당하는 메뉴 리스트가 조회가 진행됩니다.", tags = { "MenuController" })
 	@GetMapping("/menus/beverage")
-	public ResponseEntity<ResponseDTO> selectMenuListAboutBeverage() {
+	public ResponseEntity<ResponseDTO> selectMenuListAboutBeverage(@RequestParam(name = "offset", defaultValue = "1") String offset) {
+log.info("[MenuController] selectMenuListAboutDessert Start ====================================");
 		
-		return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", menuService.selectMenuListAboutBeverage()));
+		int total = menuService.selectMenuTotalAboutCategory(6);
+		
+		Criteria cri = new Criteria(Integer.valueOf(offset), 10);
+		PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
+		
+		pagingResponseDTO.setData(menuService.selectMenuListWithCategoryAndPaging(6, cri));
+		
+		pagingResponseDTO.setPageInfo(new PageDTO(cri, total));
+		
+		log.info("[MenuController] selectMenuListAboutDessert End ====================================");
+		return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", pagingResponseDTO));
 	}
 	
 	@Operation(summary = "기타 리스트 조회 요청", description = "기타 카테고리에 해당하는 메뉴 리스트가 조회가 진행됩니다.", tags = { "MenuController" })
 	@GetMapping("/menus/etc")
-	public ResponseEntity<ResponseDTO> selectMenuListAboutEtc() {
+	public ResponseEntity<ResponseDTO> selectMenuListAboutEtc(@RequestParam(name = "offset", defaultValue = "1") String offset) {
+		log.info("[MenuController] selectMenuListAboutDessert Start ====================================");
 		
-		return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", menuService.selectMenuListAboutEtc()));
+		int total = menuService.selectMenuTotalAboutCategory(7);
+		
+		Criteria cri = new Criteria(Integer.valueOf(offset), 10);
+		PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
+		
+		pagingResponseDTO.setData(menuService.selectMenuListWithCategoryAndPaging(7, cri));
+		
+		pagingResponseDTO.setPageInfo(new PageDTO(cri, total));
+		
+		log.info("[MenuController] selectMenuListAboutDessert End ====================================");
+		return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", pagingResponseDTO));
 	}
 }

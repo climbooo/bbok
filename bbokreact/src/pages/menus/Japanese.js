@@ -1,19 +1,19 @@
-import { useDispatch, useSelector } from 'react-redux';
-import Menu from '../../components/menus/Menu';
-import { useEffect, useState } from 'react';
-import { callMenuListAboutKoreanAPI } from '../../apis/MenuAPICalls';
+import { callMenuListAboutJapaneseAPI } from "../../apis/MenuAPICalls";
+import Menu from "../../components/menus/Menu";
+import { useEffect, useState, } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import MainCSS from './Menu.module.css';
 
-function Korean() {
+function Japanese() {
 
     const dispatch = useDispatch();
-    const korean = useSelector(state => state.menuReducer);
-    const koreanList = korean.data;
-    const pageInfo = korean.pageInfo;
+    const menu = useSelector(state => state.menuReducer);
+    const menuList = menu.data;
+    const pageInfo = menu.pageInfo;
     const [currentPage, setCurrentPage] = useState(1);
 
-    console.log('korean: ', korean);
-    console.log('koreanList: ', koreanList);
+    console.log('menu: ', menu);
+    console.log('menuList: ', menuList);
 
     const pageNumber = [];
     if(pageInfo) {
@@ -24,7 +24,7 @@ function Korean() {
 
     useEffect(
         () => {
-            dispatch(callMenuListAboutKoreanAPI({
+            dispatch(callMenuListAboutJapaneseAPI({
                 currentPage: currentPage
             }));
         }
@@ -35,11 +35,11 @@ function Korean() {
         <>
             <div className={ MainCSS.menuDiv }>
                 {
-                    Array.isArray(koreanList) && koreanList.map((korean) => (<Menu key={ korean.menuCode } menu={ korean } />))
+                    Array.isArray(menuList) && menuList.map((menu) => (<Menu key={ menu.menuCode } menu={ menu } />))
                 }
             </div>
             <div style={{listStyleType: "none", display: "flex"}}>
-                {Array.isArray(koreanList) &&
+                {Array.isArray(menuList) &&
                 <button
                     onClick={() => setCurrentPage(currentPage - 1)}
                     disabled={currentPage === 1}
@@ -58,7 +58,7 @@ function Korean() {
                     </button>
                 </li>
                 ))}
-                {Array.isArray(koreanList) &&
+                {Array.isArray(menuList) &&
                 <button
                     onClick={() => setCurrentPage(currentPage + 1)}
                     disabled={currentPage === pageInfo.pageEnd || pageInfo.total == 0}
@@ -70,6 +70,6 @@ function Korean() {
             </div>
         </>
     );
-}
+} 
 
-export default Korean;
+export default Japanese;

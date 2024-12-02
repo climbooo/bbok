@@ -2,7 +2,7 @@ package com.bbok.restapi.common;
 
 public class PagingResponseDTO {
 
-	 private Object data;
+	 	private Object data;
 	    private PageDTO pageInfo;
 
 	    public Object getData() {

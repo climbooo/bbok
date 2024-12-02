@@ -19,13 +19,26 @@ public interface MenuRepository extends JpaRepository<Menu, Integer>{
 
 	List<Menu> findByCategoryCode(int i);
 
-	@Query(value = "SELECT * FROM TBL_MENU A WHERE A.CATEGORY_CODE = 1 AND A.MENU_ORDERABLE = 'Y'", nativeQuery = true)
-	List<Menu> findByKoreanMenu();
+//	@Query(value = "SELECT * FROM TBL_MENU A WHERE A.CATEGORY_CODE = 1 AND A.MENU_ORDERABLE = 'Y'", nativeQuery = true)
+//	List<Menu> findByKoreanMenu();
 
-	@Query(value = "SELECT * FROM TBL_MENU A WHERE A.CATEGORY_CODE = 1 AND A.MENU_ORDERABLE = 'N'", nativeQuery = true)
+//	@Query(value = "SELECT * FROM TBL_MENU A WHERE A.CATEGORY_CODE = 1 AND A.MENU_ORDERABLE = 'N'", nativeQuery = true)
+//	Page<Menu> findByKoreanMenu(Pageable paging);
+
+	Page<Menu> findByCategoryCode(int i, Pageable paging);
+
+//	@Query(value = "SELECT a.* FROM TBL_MENU a WHERE a.CATEGORY_CODE = 2", nativeQuery = true)
+//	List<Menu> findByKoreanMenu();
+
+	@Query(value = "SELECT m FROM Menu m WHERE m.categoryCode = 1")
 	Page<Menu> findByKoreanMenu(Pageable paging);
 
-	Page<Menu> findByCategoryCode(String status, Pageable paging);
+	@Query(value = "SELECT m FROM Menu m WHERE m.categoryCode = 2")
+	Page<Menu> findByChineseMenu(Pageable paging);
+
+
+
+
 
 	
 }
